@@ -1,5 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { AuthActions } from "../store/authentication";
+import '../styles/header.css'
+
+
 
 const Logout = () => {
     const dispatch = useDispatch()
@@ -10,7 +13,7 @@ const Logout = () => {
     }
 
     return (
-        <button onClick={log}>logout</button>
+        <button onClick={log} className="btn btn-outline-danger fs-5">logout</button>
     );
 };
 

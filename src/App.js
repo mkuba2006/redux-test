@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import Header from "./components/header";
 import { Fragment } from "react";
+import Form from "./components/form";
 
 function App() {
   const isAuth = useSelector(state => state.auth.isLogged)
@@ -8,7 +9,7 @@ function App() {
   return (
     <Fragment>
       <Header/>
-      {isAuth && <p>you're logged</p>}
+      {isAuth == "modal" && <Form/>}
     </Fragment>
   );
 }
