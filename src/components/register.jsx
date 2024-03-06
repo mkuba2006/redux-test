@@ -1,20 +1,20 @@
 import { useDispatch } from "react-redux";
 import { AuthActions } from "../store/authentication";
 import '../styles/header.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button } from '@chakra-ui/react'
 
-
-
-const Logout = () => {
+const Register = () => {
     const dispatch = useDispatch()
 
     const log = (e) =>{
         e.preventDefault();
-        dispatch(AuthActions.logout())
+        dispatch(AuthActions.form())
     }
 
     return (
-        <button onClick={log} className="btn btn-outline-danger fs-5">logout</button>
+        <Button onClick={log} colorScheme='linkedin'>Register</Button>
     );
 };
 
-export default Logout;
+export default Register;

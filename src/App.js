@@ -1,16 +1,16 @@
 import { useSelector } from "react-redux";
 import Header from "./components/header";
-import { Fragment } from "react";
 import Form from "./components/form";
+import { ChakraProvider  } from '@chakra-ui/react';
 
 function App() {
   const isAuth = useSelector(state => state.auth.isLogged)
 
   return (
-    <Fragment>
+    <ChakraProvider>
       <Header/>
       {isAuth == "modal" && <Form/>}
-    </Fragment>
+    </ChakraProvider>
   );
 }
 
