@@ -1,25 +1,45 @@
 import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useDispatch } from "react-redux";
-import { AuthActions } from "../store/authentication";
+import { AuthActions } from "../../store/authentication";
 import { Input, InputGroup, Button, InputRightElement, Flex, useColorModeValue, FormControl } from "@chakra-ui/react";
-import theme from "../chakra/theme";
+import theme from "../../chakra/theme";
+import { Link } from "react-router-dom";
 
-const Form = () => {
+const Registerform = () => {
     const dispatch = useDispatch();
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
+    const [password2, setPassword2] = useState("");
 
     const [show, setShow] = React.useState(false)
+    const [show2, setShow2] = React.useState(false)
+
     const handleClick = () => setShow(!show)
+    const handleClick2 = () => setShow2(!show2)
 
     const log = (e) => {
         e.preventDefault();
-        if (name.trim() !== "" && password.trim() !== "") dispatch(AuthActions.login());
+        if (name.trim() !== "" && password.trim() !== "" && password.trim() === password2.trim()) {
+            dispatch(AuthActions.login());
+        }
     }
     const color = useColorModeValue(theme.colors.formtext.light, theme.colors.formtext.dark);
-    const navcolor = useColorModeValue(theme.colors.nav.light, theme.colors.nav.dark);
     const formbg = useColorModeValue(theme.colors.formbg.light, theme.colors.formbg.dark);
+
+    const loginButton = (
+        <Button colorScheme='blue' size='sm' onClick={log}>
+            {name.trim() !== "" && password.trim() !== "" && password.trim() === password2.trim() ? (
+                <Link to="/">
+                    Register
+                </Link>
+            ) : (
+                <span>Register</span>
+            )}
+        </Button>
+    );
+    
+
     return (
         <div>
             <div className="modal show" tabIndex="-1" style={{ display: 'block', marginTop: '50px' }}>
@@ -48,9 +68,25 @@ const Form = () => {
                                     </Button>
                                 </InputRightElement>
                             </InputGroup>
+                            <InputGroup size='md'>
+                                <FormControl id="password" colorScheme="blue">
+                                    <Input
+                                        style={{ color: color }}
+                                        type={show2 ? 'text' : 'password'}
+                                        placeholder='Repeat password'
+                                        value={password2}
+                                        onChange={(e) => setPassword2(e.target.value)}
+                                    />
+                                </FormControl>
+                                <InputRightElement width='4.5rem'>
+                                    <Button h='1.75rem' size='sm' onClick={handleClick2}>
+                                        {show2 ? 'Hide' : 'Show'}
+                                    </Button>
+                                </InputRightElement>
+                            </InputGroup>
                         </Flex>
                         <div style={{ padding: 15, textAlign: 'right' }}>
-                            <Button colorScheme='blue' size='sm' onClick={log}>Login</Button>
+                            {loginButton}
                         </div>
                     </div>
                 </div>
@@ -59,5 +95,4 @@ const Form = () => {
     );
 };
 
-export default Form;
-
+export default Registerform;

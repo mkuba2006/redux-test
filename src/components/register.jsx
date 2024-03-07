@@ -4,6 +4,7 @@ import '../styles/header.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from '@chakra-ui/react'
 
+import { Link } from "react-router-dom";
 const Register = () => {
     const dispatch = useDispatch()
 
@@ -13,7 +14,11 @@ const Register = () => {
     }
 
     return (
-        <Button onClick={log} colorScheme='linkedin'>Register</Button>
+        <Button  colorScheme='linkedin'>
+            <Link to="/register">
+                Register
+            </Link>
+        </Button>
     );
 };
 

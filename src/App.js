@@ -1,17 +1,31 @@
-import { useSelector } from "react-redux";
+
 import Header from "./components/header";
-import Form from "./components/form";
+import Registerform from "./components/tests/register_form";
+import Loginform from "./components/tests/login_form";
 import { ChakraProvider  } from '@chakra-ui/react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Welcome from "./components/welcome";
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Header />,
+    children: [
+      { path: '/register', element: <Registerform/> },
+      { path: '/', element: <Welcome/> },
+      { path: '/login', element: <Loginform />}
+    ],
+  }
+]);
+
+
 
 function App() {
-  const isAuth = useSelector(state => state.auth.isLogged)
 
   return (
-    <ChakraProvider>
-      <Header/>
-      {isAuth == "modal" && <Form/>}
-    </ChakraProvider>
-  );
+  <ChakraProvider>
+    <RouterProvider router={router} />
+  </ChakraProvider>);
 }
 
 export default App;

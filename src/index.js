@@ -8,5 +8,9 @@ import { ColorModeScript } from '@chakra-ui/react'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
-root.render(<Provider store={store}><ColorModeScript initialColorMode={theme.config.initialColorMode} /><App/></Provider>);
+root.render(
+<Provider store={store}>
+    <ColorModeScript initialColorMode={theme.config.initialColorMode} />  
+    <App/>
+</Provider>);
 
