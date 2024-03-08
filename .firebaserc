@@ -1,5 +1,5 @@
 {
   "projects": {
-    "default": "redux-aut"
+    "default": "redux-test-db"
   }
 }

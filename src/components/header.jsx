@@ -20,7 +20,7 @@ const Header = () => {
         console.log('Color mode toggled');
         toast({
             title: 'Color changed',
-            description: "You've successfully changed color",
+            description: "You've successfully changed color mode",
             status: 'success',
             duration: 1000,
             position: "bottom-right",

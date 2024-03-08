@@ -4,7 +4,9 @@ import { useDispatch } from "react-redux";
 import { AuthActions } from "../../store/authentication";
 import { Link } from "react-router-dom";
 import theme from "../../chakra/theme";
-
+import { auth } from "../auth/firebase"
+import { createUserWithEmailAndPassword,
+signInWithEmailAndPassword } from 'firebase/auth';
 
 const Loginform = () => {
     const dispatch = useDispatch();
@@ -16,8 +18,18 @@ const Loginform = () => {
     const log = (e) => {
         e.preventDefault();
         if (name.trim() !== "" && password.trim() !== "") {
-            dispatch(AuthActions.login());
+            signInWithEmailAndPassword(auth ,name, password)
+            .then((userCredential)=>{
+                alert('You are logged in');
+                const user = userCredential.user;
+                console.log(user.email);
+                dispatch(AuthActions.login());
+            }).catch((err)=>{
+                alert('failed to log in')
+                console.log(err);
+            })
         }
+
     }
     const color = useColorModeValue(theme.colors.formtext.light, theme.colors.formtext.dark);
     const formbg = useColorModeValue(theme.colors.formbg.light, theme.colors.formbg.dark);

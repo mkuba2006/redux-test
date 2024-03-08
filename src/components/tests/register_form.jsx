@@ -5,6 +5,10 @@ import { AuthActions } from "../../store/authentication";
 import { Input, InputGroup, Button, InputRightElement, Flex, useColorModeValue, FormControl } from "@chakra-ui/react";
 import theme from "../../chakra/theme";
 import { Link } from "react-router-dom";
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from "../auth/firebase";
+
 
 const Registerform = () => {
     const dispatch = useDispatch();
@@ -22,15 +26,25 @@ const Registerform = () => {
         e.preventDefault();
         if (name.trim() !== "" && password.trim() !== "" && password.trim() === password2.trim()) {
             dispatch(AuthActions.login());
+            createUserWithEmailAndPassword(auth ,name, password)
+            .then((userCredential)=>{
+                alert('You createn account');
+                console.log(userCredential);
+            }).catch((err)=>{
+                alert('failed to create user')
+            })
         }
     }
     const color = useColorModeValue(theme.colors.formtext.light, theme.colors.formtext.dark);
     const formbg = useColorModeValue(theme.colors.formbg.light, theme.colors.formbg.dark);
 
+
+    
+
     const loginButton = (
         <Button colorScheme='blue' size='sm' onClick={log}>
             {name.trim() !== "" && password.trim() !== "" && password.trim() === password2.trim() ? (
-                <Link to="/">
+                <Link to="/" >
                     Register
                 </Link>
             ) : (
@@ -69,7 +83,7 @@ const Registerform = () => {
                                 </InputRightElement>
                             </InputGroup>
                             <InputGroup size='md'>
-                                <FormControl id="password" colorScheme="blue">
+                                <FormControl id="password2" colorScheme="blue">
                                     <Input
                                         style={{ color: color }}
                                         type={show2 ? 'text' : 'password'}
