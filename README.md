@@ -1,7 +1,8 @@
 # > example of API item build:
 
 
-```{
+```
+{
   user_mail,
   user_password,
   list_of_days =[
