@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { Input, InputGroup, Button, InputRightElement, Flex, useColorModeValue, FormControl } from "@chakra-ui/react";
+import { Input, InputGroup, Button, InputRightElement, Flex, useColorModeValue, FormControl, useToast } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 import { AuthActions } from "../../store/authentication";
 import { Link } from "react-router-dom";
 import theme from "../../chakra/theme";
 import { auth } from "../auth/firebase"
-import { createUserWithEmailAndPassword,
-signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 
 const Loginform = () => {
     const dispatch = useDispatch();
@@ -14,19 +13,33 @@ const Loginform = () => {
     const [password, setPassword] = useState("");
     const [show, setShow] = React.useState(false)
     const handleClick = () => setShow(!show)
+    const toast = useToast();
 
     const log = (e) => {
         e.preventDefault();
         if (name.trim() !== "" && password.trim() !== "") {
             signInWithEmailAndPassword(auth ,name, password)
             .then((userCredential)=>{
-                alert('You are logged in');
                 const user = userCredential.user;
                 console.log(user.email);
                 dispatch(AuthActions.login());
+                toast({
+                    title: 'Success',
+                    description: "You are logged in",
+                    status: 'success',
+                    duration: 2000,
+                    position: "bottom-right",
+                    isClosable: true,
+                });
             }).catch((err)=>{
-                alert('failed to log in')
-                console.log(err);
+                toast({
+                    title: 'Error',
+                    description: "Failed to sign in",
+                    status: 'error',
+                    duration: 2000,
+                    position: "bottom-right",
+                    isClosable: true,
+                });
             })
         }
 

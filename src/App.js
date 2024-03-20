@@ -1,7 +1,7 @@
 
 import Header from "./components/header";
-import Registerform from "./components/tests/register_form";
-import Loginform from "./components/tests/login_form";
+import Registerform from "./components/forms/register_form";
+import Loginform from "./components/forms/login_form";
 import { ChakraProvider  } from '@chakra-ui/react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Welcome from "./components/welcome";

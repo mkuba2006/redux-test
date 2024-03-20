@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useDispatch } from "react-redux";
 import { AuthActions } from "../../store/authentication";
-import { Input, InputGroup, Button, InputRightElement, Flex, useColorModeValue, FormControl } from "@chakra-ui/react";
+import { Input, InputGroup, Button, InputRightElement, Flex, useColorModeValue, FormControl, useToast } from "@chakra-ui/react";
 import theme from "../../chakra/theme";
 import { Link } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
@@ -15,7 +15,7 @@ const Registerform = () => {
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
-
+    const toast = useToast();
     const [show, setShow] = React.useState(false)
     const [show2, setShow2] = React.useState(false)
 
@@ -25,13 +25,27 @@ const Registerform = () => {
     const log = (e) => {
         e.preventDefault();
         if (name.trim() !== "" && password.trim() !== "" && password.trim() === password2.trim()) {
-            dispatch(AuthActions.login());
             createUserWithEmailAndPassword(auth ,name, password)
             .then((userCredential)=>{
-                alert('You createn account');
+                dispatch(AuthActions.login());
+                toast({
+                    title: 'Success',
+                    description: "Your account has been successfully created",
+                    status: 'success',
+                    duration: 2000,
+                    position: "bottom-right",
+                    isClosable: true,
+                });
                 console.log(userCredential);
             }).catch((err)=>{
-                alert('failed to create user')
+                toast({
+                    title: 'Error',
+                    description: "Failed to create account",
+                    status: 'error',
+                    duration: 2000,
+                    position: "bottom-right",
+                    isClosable: true,
+                });
             })
         }
     }
