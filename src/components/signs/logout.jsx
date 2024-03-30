@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
-import { AuthActions } from "../store/authentication";
-import '../styles/header.css'
+import { AuthActions } from "../../store/authentication";
+import '../../styles/header.css'
 import { Button, useColorModeValue } from "@chakra-ui/react";
 
 

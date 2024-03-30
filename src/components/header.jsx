@@ -1,6 +1,6 @@
-import Login from "./login";
-import Logout from "./logout";
-import Register from "./register";
+import Login from "./signs/login";
+import Logout from "./signs/logout";
+import Register from "./signs/register";
 import '../styles/header.css'; 
 import { useSelector } from "react-redux";
 import { Flex, Text , useColorMode, useColorModeValue, Center, Switch, useToast} from '@chakra-ui/react';
@@ -34,13 +34,12 @@ const Header = () => {
                 <div className="container-fluid d-flex justify-content-around align-items-center">
                     <Center>
                         <Text style={{ color: color }} mb={0} fontSize='2xl'>
-                            <Link to="/">Redux Project</Link>
+                            <Link to="/">EASY SCHEDULE</Link>
                         </Text>
                     </Center>
                     <Flex gap={2}>
                         <Register />
-                        {isAuth === "false" && <Login theme={theme}/>}
-                        {isAuth === "true" && <Logout theme={theme}/>}
+                        {isAuth === "false" ? <Login theme={theme} /> : <Logout theme={theme}/>}
                         <Center>
                             <Switch id='email-alerts' size='lg' onChange={handleColorModeToggle} />
                         </Center>

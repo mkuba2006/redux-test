@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
-import { AuthActions } from "../store/authentication";
-import '../styles/header.css'
+import { AuthActions } from "../../store/authentication";
+import '../../styles/header.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from '@chakra-ui/react'
 
@@ -14,7 +14,7 @@ const Register = () => {
     }
 
     return (
-        <Button  colorScheme='linkedin'>
+        <Button  colorScheme='purple'>
             <Link to="/register">
                 Register
             </Link>

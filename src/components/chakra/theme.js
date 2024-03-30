@@ -13,7 +13,7 @@ const theme = extendTheme({
       dark: 'white',
     },
     nav:{
-      light: '#4FD1C5',
+      light: '#805AD5',
       dark: '#171923',
     },
     formtext: {
