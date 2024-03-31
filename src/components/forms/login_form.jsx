@@ -3,7 +3,7 @@ import { Input, InputGroup, Button, InputRightElement, Flex, useColorModeValue, 
 import { useDispatch } from "react-redux";
 import { AuthActions } from "../../store/authentication";
 import { Link } from "react-router-dom";
-import theme from "../../chakra/theme";
+import theme from "../chakra/theme";
 import { auth } from "../auth/firebase"
 import { signInWithEmailAndPassword } from 'firebase/auth';
 

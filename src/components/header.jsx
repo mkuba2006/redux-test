@@ -4,7 +4,7 @@ import Register from "./signs/register";
 import '../styles/header.css'; 
 import { useSelector } from "react-redux";
 import { Flex, Text , useColorMode, useColorModeValue, Center, Switch, useToast} from '@chakra-ui/react';
-import theme from "../chakra/theme";
+import theme from "./chakra/theme";
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 
 const Header = () => {

@@ -15,7 +15,7 @@ import Login from "./signs/login";
 import Logout from "./signs/logout";
 import { useSelector } from "react-redux";
 import { useColorMode, useColorModeValue} from '@chakra-ui/react';
-import theme from "../chakra/theme";
+import theme from "./chakra/theme";
 
 
 const Welcome = () => {

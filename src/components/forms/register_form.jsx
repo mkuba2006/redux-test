@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useDispatch } from "react-redux";
 import { AuthActions } from "../../store/authentication";
 import { Input, InputGroup, Button, InputRightElement, Flex, useColorModeValue, FormControl, useToast } from "@chakra-ui/react";
-import theme from "../../chakra/theme";
+import theme from "../chakra/theme";
 import { Link } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { signInWithEmailAndPassword } from 'firebase/auth';
