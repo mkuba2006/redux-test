@@ -5,6 +5,7 @@ import Loginform from "./components/forms/login_form";
 import { ChakraProvider  } from '@chakra-ui/react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Welcome from "./components/welcome";
+import Card from "./components/cards/card_ui";
 
 const router = createBrowserRouter([
   {
@@ -13,7 +14,8 @@ const router = createBrowserRouter([
     children: [
       { path: '/register', element: <Registerform/> },
       { path: '/', element: <Welcome/> },
-      { path: '/login', element: <Loginform />}
+      { path: '/login', element: <Loginform />},
+      { path: '/items', element: <Card />}
     ],
   }
 ]);
