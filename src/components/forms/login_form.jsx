@@ -6,8 +6,10 @@ import { Link } from "react-router-dom";
 import theme from "../chakra/theme";
 import { auth } from "../auth/firebase"
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 const Loginform = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
@@ -29,6 +31,7 @@ const Loginform = () => {
                     position: "bottom-right",
                     isClosable: true,
                 });
+                navigate('/items');
             }).catch((err) => {
                 toast({
                     title: 'Error',

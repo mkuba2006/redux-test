@@ -1,39 +1,51 @@
-import "./card.css"
+import React, { useState, useEffect } from "react";
+import "./card.css";
 import { useColorMode, useColorModeValue } from "@chakra-ui/react";
 import theme from "../chakra/theme";
-import { Menu, MenuButton, Icon, MenuList, MenuItem, Portal, Button } from "@chakra-ui/react";
-import { CloseIcon, DeleteIcon ,ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import { Menu, MenuButton, MenuList, MenuItem, Portal, Button } from "@chakra-ui/react";
+import { DeleteIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import { useDispatch, useSelector } from "react-redux";
+import { DateActions } from "../../store/authentication";
 
-const cards=[
-    {
-        name: "Mon",
-        data:"10.01",
-        total: 19
-    },
-    {
-        name: "Tue",
-        data:"10.01",
-        total: 11
-    },
-    {
-        name: "Wed",
-        data:"10.01",
-        total: 27
-    },
-    {
-        name: "Fri",
-        data:"10.01",
-        total: 35
-    },
-    {
-        name: "Thu",
-        data:"10.01",
-        total: 22
-    }
-    
+
+const initialCards = [
+    { name: "Mon", day: "20", month: "9", total: 19, left: 0 },
+    { name: "Tue", day: "21", month: "9", total: 11, left: 0 },
+    { name: "Wed", day: "22", month: "9", total: 27, left: 0 },
+    { name: "Fri", day: "23", month: "9", total: 35, left: 0 },
+    { name: "Thu", day: "24", month: "11", total: 22, left: 0 }
 ];
 
-const Card = () =>{
+const Card = () => {
+    const dispatch = useDispatch();
+    const date = useSelector(state => state.date);
+    const [cards, setCards] = useState(initialCards);
+
+    useEffect(() => {
+        dispatch(DateActions.getDate());
+        console.log(date);
+        
+    }, [dispatch]);
+
+    useEffect(() => {
+        const today = new Date();
+        
+        const currentDate = new Date(today.getFullYear(), date.month - 1, date.day);
+
+        const updatedCards = cards.map(card => {
+            const day = parseInt(card.day, 10);
+            const month = parseInt(card.month, 10) -1;
+            const cardDate = new Date(today.getFullYear(),month, day);
+            const timeDiff = cardDate - currentDate;
+            const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+            return { ...card, left: daysLeft };
+        });
+
+        setCards(updatedCards);
+        updatedCards.forEach(card => console.log(card));
+    }, [date]); 
+
     const navcolor = useColorModeValue(theme.colors.nav.light, theme.colors.nav.dark);
     const color = useColorModeValue(theme.colors.text.light, theme.colors.text.dark);
 
@@ -48,11 +60,12 @@ const Card = () =>{
                             <header>
 
                                 <div className="dane">
-                                    <h2>{card.data}</h2>
+                                    <h2>{card.day}.{card.month}</h2>
                                     <h3>{card.name}</h3>
                                 </div>
                                 <div>
                                     <h5>{card.total} tasks</h5>
+                                    {card.left} days left
                                 </div>
                 
                                 <Menu className="n">
@@ -86,123 +99,3 @@ export default Card;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import "./card.css"
-// import { useColorMode, useColorModeValue } from "@chakra-ui/react";
-// import theme from "../chakra/theme";
-// import { Menu, MenuButton, Icon, MenuList, MenuItem, Portal, Button } from "@chakra-ui/react";
-// import { CloseIcon, DeleteIcon ,ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-
-// const cards=[
-//     {
-//         name: "Poniedziałek",
-//         total: 19,
-//         description:"Zadania",
-//         footer: "Completed: 13",
-//     },
-//     {
-//         name: "Wtorek",
-//         total: 11,
-//         description:"Zadania",
-//         footer: "Completed: 0",
-//     },
-//     {
-//         name: "Środa",
-//         total: 27,
-//         description:"Projekty",
-//         footer: "Ukończone: 21",
-//     },
-//     {
-//         name: "Piątek",
-//         total: 35,
-//         description:"Spotkania",
-//         footer: "Zakończone: 29",
-//     },
-//     {
-//         name: "Czwartek",
-//         total: 22,
-//         description:"Prezentacje",
-//         footer: "Wykonane: 18",
-//     }
-    
-// ];
-
-// const Card = () =>{
-//     const navcolor = useColorModeValue(theme.colors.nav.light, theme.colors.nav.dark);
-//     const color = useColorModeValue(theme.colors.text.light, theme.colors.text.dark);
-
-//     return(
-//         <div className="cards" >
-//             {cards.map((card)=>(
-//                 <label key={card.name} id={card.name}>
-//                     <input id="chech" type="checkbox" />
-//                     <div className="card">
-//                         <div className="front" style={{ backgroundColor: navcolor }}>
-//                             <header>
-//                                 <h2 style={{ color: color }} >{card.name}</h2>
-//                                 <Menu className="n">
-//                                     <MenuButton as={Button} style={{ background: "none" }}>
-//                                         <div className="dots">
-//                                             <div className="dot"></div>
-//                                             <div className="dot"></div>
-//                                             <div className="dot"></div>
-//                                         </div>
-//                                     </MenuButton>
-//                                     <Portal>
-//                                         <MenuList>
-//                                             <MenuItem icon={<DeleteIcon />} >Remove</MenuItem>
-//                                             <MenuItem icon={<ViewIcon />}>Open</MenuItem>
-//                                             <MenuItem icon={<ViewOffIcon />}>Close</MenuItem>
-//                                         </MenuList>
-//                                     </Portal>
-//                                 </Menu>
-
-
-//                             </header>
-//                             <h5 style={{ color: color }}>{card.total}</h5>
-//                             <h3 style={{ color: color }}>{card.description}</h3>
-//                             <h4 style={{ color: color }}>{card.footer}</h4>
-//                         </div>
-//                         <div className="back" style={{ backgroundColor: navcolor }}>
-//                             <header>
-//                                 <h2 style={{ color: color }}>{card.name}</h2>
-//                                 <Icon as={CloseIcon} style={{ color: color }} />
-//                             </header>
-//                             <p style={{ color: color }}>More Informations</p>
-//                         </div>
-//                     </div>
-//                 </label>
-//             ))}
-//         </div>
-//     )
-// };
-// export default Card

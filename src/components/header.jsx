@@ -12,7 +12,7 @@ const Header = () => {
     const { toggleColorMode } = useColorMode();
     const toast = useToast();
     const navcolor = useColorModeValue(theme.colors.nav.light, theme.colors.nav.dark);
-    const color = useColorModeValue(theme.colors.text.light, theme.colors.text.dark);
+    // const color = useColorModeValue(theme.colors.text.dark, theme.colors.text.dark);
 
 
     const handleColorModeToggle = () => {
@@ -33,7 +33,7 @@ const Header = () => {
             <nav className="navbar navbar-expand-lg navbar-custom-padding" style={{ backgroundColor: navcolor }}>
                 <div className="container-fluid d-flex justify-content-around align-items-center">
                     <Center>
-                        <Text style={{ color: color }} mb={0} fontSize='2xl'>
+                        <Text style={{ color: theme.colors.text.dark }} mb={0} fontSize='2xl'>
                             <Link to="/">EASY SCHEDULE</Link>
                         </Text>
                     </Center>

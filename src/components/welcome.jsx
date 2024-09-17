@@ -1,14 +1,3 @@
-// import Card from "./cards/card_ui"
-// const Welcome = () => {
-//     return (
-//         <div>
-//             <Card/>
-//         </div>
-//     );
-// };
-
-// export default Welcome;
-
 import "../styles/welcome.css"
 import Register from "./signs/register";
 import Login from "./signs/login";

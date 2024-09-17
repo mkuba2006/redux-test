@@ -9,7 +9,6 @@ import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from "../auth/firebase";
 
-
 const Registerform = () => {
     const dispatch = useDispatch();
     const [name, setName] = useState("");
