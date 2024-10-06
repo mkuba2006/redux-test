@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 import { Flex, Text , useColorMode, useColorModeValue, Center, Switch, useToast} from '@chakra-ui/react';
 import theme from "./chakra/theme";
 import { Link, Outlet, useNavigate } from 'react-router-dom';
+import Add_CART from "./add_card/add_card";
+
 
 const Header = () => {
     const isAuth = useSelector(state => state.auth.isLogged);
@@ -29,7 +31,6 @@ const Header = () => {
     };
 
     return (
-        <>
             <nav className="navbar navbar-expand-lg navbar-custom-padding" style={{ backgroundColor: navcolor }}>
                 <div className="container-fluid d-flex justify-content-around align-items-center">
                     <Center>
@@ -43,11 +44,10 @@ const Header = () => {
                         <Center>
                             <Switch id='email-alerts' size='lg' onChange={handleColorModeToggle} />
                         </Center>
+                        <Add_CART />
                     </Flex>
                 </div>
             </nav>
-            <Outlet />
-        </>
     );
 };
 

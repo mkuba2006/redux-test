@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { AuthActions } from "../../store/authentication";
 import '../../styles/header.css'
 import { Button, useColorModeValue } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 
 const Logout = ({theme}) => {
@@ -14,7 +15,9 @@ const Logout = ({theme}) => {
     }
 
     return (
-        <Button onClick={log} colorScheme={bg} color={color}>Logout</Button>
+        <Button onClick={log} colorScheme={bg} color={color}>
+            <Link To="./">Logout</Link>
+        </Button>
     );
 };
 

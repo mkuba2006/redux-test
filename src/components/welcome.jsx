@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 import { useColorMode, useColorModeValue} from '@chakra-ui/react';
 import theme from "./chakra/theme";
 
-
 const Welcome = () => {
 
     const isAuth = useSelector(state => state.auth.isLogged);
