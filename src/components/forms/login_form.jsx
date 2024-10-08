@@ -22,7 +22,7 @@ const Loginform = () => {
             signInWithEmailAndPassword(auth, name, password)
             .then((userCredential) => {
                 const user = userCredential.user;
-                dispatch(AuthActions.login());
+                dispatch(AuthActions.login(auth, name, password));
                 toast({
                     title: 'Success',
                     description: "You are logged in",

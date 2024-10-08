@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import { auth } from "../components/auth/firebase";
 const defaultValue = {
   isLogged: "false",
 };
@@ -17,6 +17,8 @@ const AuthenticationSlice = createSlice({
       prev.isLogged = "modal";
     },
     login(prev) {
+      console.log(auth);
+      
       prev.isLogged = "true";
     },
     logout(prev) {
