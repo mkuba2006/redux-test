@@ -7,6 +7,7 @@ import Welcome from "./components/welcome";
 import Card from "./components/cards/card_ui";
 import Error from "./components/error";
 import Layout from "./components/layout";
+import Form_card from "./components/add_card/card_form";
 
 const router = createBrowserRouter([
   {
@@ -17,7 +18,8 @@ const router = createBrowserRouter([
       { path: '/register', element: <Registerform/> },
       { path: '/', element: <Welcome/> },
       { path: '/login', element: <Loginform />},
-      { path: '/items', element: <Card />}
+      { path: '/items', element: <Card />},
+      { path: '/Form_card', element: <Form_card />}
     ],
   }
 ]);

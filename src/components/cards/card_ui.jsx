@@ -6,6 +6,7 @@ import { Menu, MenuButton, MenuList, MenuItem, Portal, Button } from "@chakra-ui
 import { DeleteIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { DateActions } from "../../store/authentication";
+import { Link } from "react-router-dom";
 
 
 const initialCards = [
@@ -59,53 +60,58 @@ const Card = () => {
     const color = useColorModeValue(theme.colors.text.light, theme.colors.text.dark);
 
     return(
-        <div className="cards" >
-            {cards.map((card)=>(
-                <label key={card.name} id={card.name}>
-                    <input id="chech" type="checkbox" />
-                    <div className="card">
+        <div id="sum">
+            <Link to="/Form_card">
+                <Button variant="subtle" style={{ backgroundColor: navcolor }} id="to_form_card" _hover={{ transform: "scale(1.02)", transition: "all 0.5s ease" }}><span>&#43; </span>  Add list</Button>
+            </Link>
+            <div className="cards" >
+                {cards.map((card)=>(
+                    <label key={card.name} id={card.name}>
+                        <input id="chech" type="checkbox" />
+                        <div className="card">
 
-                        <div className="front" style={{ backgroundColor: navcolor }}>
-                            <header>
+                            <div className="front" style={{ backgroundColor: navcolor }}>
+                                <header>
 
-                                <div id="one">
-                                    <div className="dane">
-                                        <h2>{card.day}.{card.month}</h2>
-                                        <h3>{card.name}</h3>
+                                    <div id="one">
+                                        <div className="dane">
+                                            <h2>{card.day}.{card.month}</h2>
+                                            <h3>{card.name}</h3>
+                                        </div>
+                                        <Menu className="n">
+                                            <MenuButton as={Button} style={{ background: "none" }}>
+                                                <div className="dots">
+                                                    <div className="dot"></div>
+                                                    <div className="dot"></div>
+                                                    <div className="dot"></div>
+                                                </div>
+                                            </MenuButton>
+                                            <Portal>
+                                                <MenuList>
+                                                    <MenuItem icon={<DeleteIcon />} >Remove</MenuItem>
+                                                    <MenuItem icon={<ViewIcon />}>Open</MenuItem>
+                                                    <MenuItem icon={<ViewOffIcon />}>Close</MenuItem>
+                                                </MenuList>
+                                            </Portal>
+                                        </Menu>
                                     </div>
-                                    <Menu className="n">
-                                        <MenuButton as={Button} style={{ background: "none" }}>
-                                            <div className="dots">
-                                                <div className="dot"></div>
-                                                <div className="dot"></div>
-                                                <div className="dot"></div>
-                                            </div>
-                                        </MenuButton>
-                                        <Portal>
-                                            <MenuList>
-                                                <MenuItem icon={<DeleteIcon />} >Remove</MenuItem>
-                                                <MenuItem icon={<ViewIcon />}>Open</MenuItem>
-                                                <MenuItem icon={<ViewOffIcon />}>Close</MenuItem>
-                                            </MenuList>
-                                        </Portal>
-                                    </Menu>
-                                </div>
 
 
-                                <div id="two">
-                                    <h5>{card.total} tasks</h5>
-                                    <h5 style={{ color: card.color }}>{card.left} days left</h5>
-                                </div>
-                
+                                    <div id="two">
+                                        <h5>{card.total} tasks</h5>
+                                        <h5 style={{ color: card.color }}>{card.left} days left</h5>
+                                    </div>
+                    
 
 
-                            </header>
+                                </header>
+                            </div>
+
+
                         </div>
-
-
-                    </div>
-                </label>
-            ))}
+                    </label>
+                ))}
+            </div>
         </div>
     )
 };
