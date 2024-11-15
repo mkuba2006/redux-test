@@ -12,24 +12,26 @@ const Form_card = () => {
         e.preventDefault();
         
         const taskName = listName.trim();
-        if (taskName === "") return; // Prevent creating an empty task list
+        if (taskName === "") return; 
         
         try {
-            // Create or update the document for the task list with taskName
-            const taskRef = doc(firestore, "task_list", taskName); // Document with the task name
+            const taskRef = doc(firestore, "task_list", taskName);
+            const deadlineDate = new Date(deadline);
             const newTask = {
-                deadline: deadline,
-                createdAt: new Date()
+                name: listName,
+                day: deadlineDate.getDate(),
+                month: deadlineDate.getMonth() + 1, 
+                year: deadlineDate.getFullYear(),
+                list: []
             };
-            
-            // Set the document with the task data
             await setDoc(taskRef, newTask); 
             console.log("Added task:", newTask);
-
+            console.log( "Day of the month:", deadlineDate.getDate(),  "Month:", deadlineDate.getMonth() + 1,  "Year:", deadlineDate.getFullYear() );
         } catch (error) {
             console.error("Error adding document:", error);
         }
     };
+    
 
     return (
         <div id="form_box">
