@@ -27,8 +27,8 @@ export const printItem = async (x) => {
         const docSnap = await getDoc(kolekcja);
         if (docSnap.exists()) {
             const itemData = docSnap.data();
-            const updatedLista = Array.isArray(itemData.lista) ? [...itemData.lista, 'x'] : ['x']; 
-            await updateDoc(kolekcja, { lista: updatedLista });
+            const updatedLista = Array.isArray(itemData.tasks) ? [...itemData.tasks, 'x'] : ['x']; 
+            await updateDoc(kolekcja, { tasks: updatedLista });
             console.log("Item updated successfully:", itemData);
         } else {
             console.log("Item not found");
