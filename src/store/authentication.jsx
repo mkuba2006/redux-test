@@ -41,8 +41,29 @@ const DateSlice = createSlice({
   },
 });
 
+const items  = []
+
+const ItemsSlice = createSlice({
+  name: 'items',
+  initialState: items,
+  reducers: {
+    update(state, action) {
+      console.log(state,action);
+      return action.payload;
+    }
+  }
+});
+
+
+
+
+
 export const authReducer = AuthenticationSlice.reducer;
 export const dateReducer = DateSlice.reducer;
+export const ItemsReducer = ItemsSlice.reducer;
+
 
 export const AuthActions = AuthenticationSlice.actions;
 export const DateActions = DateSlice.actions;
+export const ItemsActions = ItemsSlice.actions;
+

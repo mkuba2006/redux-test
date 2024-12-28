@@ -18,6 +18,7 @@
     max-width: 300px;
     height: 40px;
     font-weight: 500;
+    background: none;
 }
 
 #form_list button{
@@ -32,4 +33,13 @@
     align-items: center;
     max-width: 300px;
     padding: 2px 10px;
+}
+
+#space{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+#space a{
+    height: 24px;
 }

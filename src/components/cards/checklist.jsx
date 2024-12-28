@@ -1,18 +1,38 @@
 import { collection, getDocs } from '@firebase/firestore';
 import { firestore } from "../auth/firebase";
-
+import { doc, getDoc, updateDoc } from '@firebase/firestore';
 
 export const CheckList = async () => {
     const list = []
     const kolekcja = collection(firestore, "task_list");
+    
     try {
         const dane = await getDocs(kolekcja);
-        console.clear()
         dane.forEach(doc => {
-            console.log(doc.id, doc.data());
-            list.push(doc.id)
+            list.push([doc.id, doc.data()])
         });
-        console.log(list);
+        return list
+    } catch (error) {
+        console.error("Error:", error);
+        return []
+    }
+};
+
+
+
+export const printItem = async (x) => {
+    const kolekcja = doc(firestore, "task_list", x); 
+    
+    try {
+        const docSnap = await getDoc(kolekcja);
+        if (docSnap.exists()) {
+            const itemData = docSnap.data();
+            const updatedLista = Array.isArray(itemData.lista) ? [...itemData.lista, 'x'] : ['x']; 
+            await updateDoc(kolekcja, { lista: updatedLista });
+            console.log("Item updated successfully:", itemData);
+        } else {
+            console.log("Item not found");
+        }
     } catch (error) {
         console.error("Error:", error);
     }

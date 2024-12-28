@@ -22,7 +22,7 @@ const Form_card = () => {
                 day: deadlineDate.getDate(),
                 month: deadlineDate.getMonth() + 1, 
                 year: deadlineDate.getFullYear(),
-                list: []
+                tasks: []
             };
             await setDoc(taskRef, newTask); 
             console.log("Added task:", newTask);
@@ -37,20 +37,10 @@ const Form_card = () => {
         <div id="form_box">
             <form id="form_list" onSubmit={handleFormSubmit}>
                 <h1>Compete Data</h1>
-                <Input 
-                    placeholder="List Name" 
-                    value={listName} 
-                    onChange={(e) => setListName(e.target.value)} 
-                />
+                <Input placeholder="List Name" value={listName} onChange={(e) => setListName(e.target.value)} />
                 <Box borderRadius="md" borderWidth="1.5px" id="box">
                     <label htmlFor="date">Deadline:</label>
-                    <input 
-                        type="date" 
-                        id="date" 
-                        name="date" 
-                        value={deadline} 
-                        onChange={(e) => setDeadline(e.target.value)} 
-                    />
+                    <input  type="date" id="date" name="date" value={deadline} onChange={(e) => setDeadline(e.target.value)} />
                 </Box>
                 <Button variant="outline" type="submit">Submit</Button>
             </form>
