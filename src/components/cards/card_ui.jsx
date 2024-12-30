@@ -4,13 +4,14 @@ import { useColorModeValue } from "@chakra-ui/react";
 import theme from "../chakra/theme";
 import { Menu, MenuButton, MenuList, MenuItem, Portal, Button } from "@chakra-ui/react";
 import { DeleteIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { DateActions } from "../../store/authentication";
-import { Link } from "react-router-dom";
-import { CheckList, printItem } from "./checklist";
+import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
+import { CheckList, printItem, DeleteItem } from "./checklist";
 
 const Card = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate(); // Initialize navigate
     const [cards, setCards] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -44,6 +45,11 @@ const Card = () => {
         return '#808080';
     };
 
+    const handleDelete = async (name) => {
+        await DeleteItem(name);
+        fetchCheckList(); 
+    };
+
     const navcolor = useColorModeValue(theme.colors.nav.light, theme.colors.nav.dark);
 
     return (
@@ -64,13 +70,13 @@ const Card = () => {
                         const day = card.data.getDate();
                         const month = card.data.getMonth() + 1;
                         return (
-                            <label key={card.name} id={card.name} onClick={() => printItem(card.name)}>
+                            <label key={card.name} id={card.name} >
                                 <input id="chech" type="checkbox" />
                                 <div className="card">
                                     <div className="front" style={{ backgroundColor: navcolor }}>
                                         <header>
                                             <div id="one">
-                                                <div className="dane">
+                                                <div className="dane" onClick={() => navigate(`/items/${card.name}`, { state: { card } })}>
                                                     <h2>{`${String(day).padStart(2, '0')}.${String(month).padStart(2, '0')}`}</h2>
                                                     <h3>{card.name}</h3>
                                                 </div>
@@ -84,7 +90,9 @@ const Card = () => {
                                                     </MenuButton>
                                                     <Portal>
                                                         <MenuList>
-                                                            <MenuItem icon={<DeleteIcon />}>Remove</MenuItem>
+                                                            <MenuItem icon={<DeleteIcon />} onClick={() => handleDelete(card.name)}>
+                                                                Remove
+                                                            </MenuItem>
                                                             <MenuItem icon={<ViewIcon />}>Open</MenuItem>
                                                             <MenuItem icon={<ViewOffIcon />}>Close</MenuItem>
                                                         </MenuList>

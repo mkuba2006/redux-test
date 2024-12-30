@@ -1,13 +1,15 @@
 import { Input, Button, Box } from "@chakra-ui/react";
 import { useState } from "react";
-import { addDoc, collection, doc, setDoc } from '@firebase/firestore';
+import { doc, setDoc } from '@firebase/firestore';
 import { firestore } from "../auth/firebase";
+import { Link,useNavigate  } from "react-router-dom";
 import './list.css';
 
 const Form_card = () => {
     const [listName, setListName] = useState(""); 
     const [deadline, setDeadline] = useState(""); 
-
+    const navigate = useNavigate();
+    
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         
@@ -27,6 +29,7 @@ const Form_card = () => {
             await setDoc(taskRef, newTask); 
             console.log("Added task:", newTask);
             console.log( "Day of the month:", deadlineDate.getDate(),  "Month:", deadlineDate.getMonth() + 1,  "Year:", deadlineDate.getFullYear() );
+            navigate('/items')
         } catch (error) {
             console.error("Error adding document:", error);
         }
@@ -42,7 +45,7 @@ const Form_card = () => {
                     <label htmlFor="date">Deadline:</label>
                     <input  type="date" id="date" name="date" value={deadline} onChange={(e) => setDeadline(e.target.value)} />
                 </Box>
-                <Button variant="outline" type="submit">Submit</Button>
+                <Button variant="outline" type="submit" >Submit</Button>
             </form>
         </div>
     );

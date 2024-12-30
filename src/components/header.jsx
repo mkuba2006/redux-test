@@ -41,10 +41,10 @@ const Header = () => {
                     <Flex gap={2}>
                         <Register />
                         {isAuth === "false" ? <Login theme={theme} /> : <Logout theme={theme}/>}
+                        <Add_CART />
                         <Center>
                             <Switch id='email-alerts' size='lg' onChange={handleColorModeToggle} />
                         </Center>
-                        <Add_CART />
                     </Flex>
                 </div>
             </nav>

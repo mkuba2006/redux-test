@@ -1,6 +1,6 @@
 import { collection, getDocs } from '@firebase/firestore';
 import { firestore } from "../auth/firebase";
-import { doc, getDoc, updateDoc } from '@firebase/firestore';
+import { doc, getDoc, updateDoc, deleteDoc } from '@firebase/firestore';
 
 export const CheckList = async () => {
     const list = []
@@ -20,8 +20,14 @@ export const CheckList = async () => {
 
 
 
-export const printItem = async (x) => {
-    const kolekcja = doc(firestore, "task_list", x); 
+export const printItem = async (card) => {
+    console.clear()
+    console.log("Whole card object:");
+    console.log(card.name);
+    console.log(card.data);
+    console.log(card.lista);
+
+    const kolekcja = doc(firestore, "task_list", card.name); 
     
     try {
         const docSnap = await getDoc(kolekcja);
@@ -29,11 +35,22 @@ export const printItem = async (x) => {
             const itemData = docSnap.data();
             const updatedLista = Array.isArray(itemData.tasks) ? [...itemData.tasks, 'x'] : ['x']; 
             await updateDoc(kolekcja, { tasks: updatedLista });
-            console.log("Item updated successfully:", itemData);
         } else {
             console.log("Item not found");
         }
     } catch (error) {
         console.error("Error:", error);
+    }
+};
+
+
+
+export const DeleteItem = async (name) => {
+    try {
+        const itemRef = doc(firestore, "task_list", name);
+        await deleteDoc(itemRef);
+        console.log(`Usunięto ${name}`);
+    } catch (error) {
+        console.error("Próba nieudana:", error);
     }
 };
