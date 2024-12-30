@@ -6,12 +6,12 @@ import { Menu, MenuButton, MenuList, MenuItem, Portal, Button } from "@chakra-ui
 import { DeleteIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useDispatch } from "react-redux";
 import { DateActions } from "../../store/authentication";
-import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
+import { Link, useNavigate } from "react-router-dom"; 
 import { CheckList, printItem, DeleteItem } from "./checklist";
 
 const Card = () => {
     const dispatch = useDispatch();
-    const navigate = useNavigate(); // Initialize navigate
+    const navigate = useNavigate();
     const [cards, setCards] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -90,9 +90,7 @@ const Card = () => {
                                                     </MenuButton>
                                                     <Portal>
                                                         <MenuList>
-                                                            <MenuItem icon={<DeleteIcon />} onClick={() => handleDelete(card.name)}>
-                                                                Remove
-                                                            </MenuItem>
+                                                            <MenuItem icon={<DeleteIcon />} onClick={() => handleDelete(card.name)}> Remove</MenuItem>
                                                             <MenuItem icon={<ViewIcon />}>Open</MenuItem>
                                                             <MenuItem icon={<ViewOffIcon />}>Close</MenuItem>
                                                         </MenuList>

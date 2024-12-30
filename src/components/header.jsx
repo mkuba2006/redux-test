@@ -14,12 +14,13 @@ const Header = () => {
     const { toggleColorMode } = useColorMode();
     const toast = useToast();
     const navcolor = useColorModeValue(theme.colors.nav.light, theme.colors.nav.dark);
+    const bcb = useColorModeValue(theme.colors.bcb.light, theme.colors.bcb.dark);
+    const swit = useColorModeValue(theme.colors.swit.light, theme.colors.swit.dark);
     // const color = useColorModeValue(theme.colors.text.dark, theme.colors.text.dark);
 
 
     const handleColorModeToggle = () => {
         toggleColorMode();
-        console.log('Color mode toggled');
         toast({
             title: 'Color changed',
             description: "You've successfully changed color mode",
@@ -34,16 +35,16 @@ const Header = () => {
             <nav className="navbar navbar-expand-lg navbar-custom-padding" style={{ backgroundColor: navcolor }}>
                 <div className="container-fluid d-flex justify-content-around align-items-center">
                     <Center>
-                        <Text style={{ color: theme.colors.text.dark }} mb={0} fontSize='2xl'>
+                        <Text style={{ color: theme.colors.text.dark }} mb={0} fontSize='3xl' fontWeight='500'>
                             <Link to="/">EASY SCHEDULE</Link>
                         </Text>
                     </Center>
-                    <Flex gap={2}>
+                    <Flex gap={2} background={bcb} px='5' py='2' borderRadius='7'>
                         <Register />
                         {isAuth === "false" ? <Login theme={theme} /> : <Logout theme={theme}/>}
                         <Add_CART />
-                        <Center>
-                            <Switch id='email-alerts' size='lg' onChange={handleColorModeToggle} />
+                        <Center ml='2'>
+                            <Switch id='email-alerts' size='lg' onChange={handleColorModeToggle} sx={{'.chakra-switch__track': { backgroundColor: swit },'.chakra-switch__thumb': { backgroundColor: 'white' }}}  />
                         </Center>
                     </Flex>
                 </div>

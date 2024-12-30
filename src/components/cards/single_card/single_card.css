@@ -1,0 +1,25 @@
+#Single_Card{
+    margin: 10vh auto 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    min-width: 600px;
+    padding: 8px 20px ;
+}
+
+#Single_Card h1{
+    font-size: 60px;
+    margin: 0;
+}
+
+
+
+#back{
+    width: 100px;
+}
+
+#p_task{
+    margin: 0;
+    padding-bottom: 3px;
+    font-size: 20px;
+}

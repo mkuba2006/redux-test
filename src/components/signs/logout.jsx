@@ -15,7 +15,7 @@ const Logout = ({theme}) => {
     }
 
     return (
-        <Button onClick={log} colorScheme={bg} color={color}>
+        <Button onClick={log} colorScheme={bg} color='white'>
             <Link To="./">Logout</Link>
         </Button>
     );

@@ -13,7 +13,7 @@ const theme = extendTheme({
       dark: 'white',
     },
     nav:{
-      light: '#805AD5',
+      light: '#a1a1aa',
       dark: '#171923',
     },
     formtext: {
@@ -24,7 +24,24 @@ const theme = extendTheme({
       light: 'white',
       dark: '#171923',
     },
+    card: {
+      light: '#f0fdfa',
+      dark: '#171923',
+    },
+    bcb: {
+      light: '#71717a',
+      dark: '#27272a',
+    },
+    reg: {
+      light: '#0c5d56',
+      dark: '#0c5d56',
+    },
+    swit: {
+      light: '#0c5d56',
+      dark: '#86efac',
+    },
   },
 });
 
 export default theme;
+
