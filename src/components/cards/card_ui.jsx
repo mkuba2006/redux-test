@@ -73,7 +73,7 @@ const Card = () => {
                             <label key={card.name} id={card.name} >
                                 <input id="chech" type="checkbox" />
                                 <div className="card">
-                                    <div className="front" style={{ backgroundColor: navcolor }}>
+                                    <div className="front" style={{ backgroundColor: navcolor }} >
                                         <header>
                                             <div id="one">
                                                 <div className="dane" onClick={() => navigate(`/items/${card.name}`, { state: { card } })}>
@@ -97,7 +97,7 @@ const Card = () => {
                                                     </Portal>
                                                 </Menu>
                                             </div>
-                                            <div id="two">
+                                            <div id="two" onClick={() => navigate(`/items/${card.name}`, { state: { card } })}>
                                                 <h5>{card.lista.length} tasks</h5>
                                                 <h5 style={{ color: card.color }}>{card.left} days left</h5>
                                             </div>
