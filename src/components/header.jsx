@@ -1,13 +1,13 @@
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { Flex, Text, useColorMode, useColorModeValue, Center, Switch, useToast } from '@chakra-ui/react';
+import { Link, useLocation } from 'react-router-dom';
+import theme from "./chakra/theme";
 import Login from "./signs/login";
 import Logout from "./signs/logout";
 import Register from "./signs/register";
-import '../styles/header.css'; 
-import { useSelector } from "react-redux";
-import { Flex, Text, useColorMode, useColorModeValue, Center, Switch, useToast } from '@chakra-ui/react';
-import theme from "./chakra/theme";
-import { Link, useLocation } from 'react-router-dom';
 import Add_CART from "./add_card/add_card";
-import { useEffect } from "react";
+import '../styles/header.css'; 
 
 const Header = () => {
     const isAuth = useSelector(state => state.auth.isLogged);
@@ -19,7 +19,16 @@ const Header = () => {
     const location = useLocation();
 
     useEffect(() => {
-        console.log(location.pathname);
+        document.querySelectorAll("#register, #login, #logout, #items").forEach(el => {
+            el.style.backgroundColor = "transparent";
+            el.style.borderRadius = "5px"; 
+        });
+        const currentId = location.pathname.substring(1);
+        const activeElement = document.getElementById(currentId);
+        if (activeElement) {
+            activeElement.style.backgroundColor = "#16C47F";
+            activeElement.style.borderRadius = "25px";
+        }
     }, [location]);
 
     const handleColorModeToggle = () => {
@@ -34,8 +43,6 @@ const Header = () => {
         });
     };
 
-    const isActive = (path) => location.pathname === path;
-
     return (
         <nav className="navbar navbar-expand-lg navbar-custom-padding" style={{ backgroundColor: navcolor }}>
             <div className="container-fluid d-flex justify-content-around align-items-center">
@@ -44,22 +51,24 @@ const Header = () => {
                         <Link to="/">EASY SCHEDULE</Link>
                     </Text>
                 </Center>
-                <Flex gap={2} background={bcb} px='5' py='2' borderRadius='7'>
-                    <Link to="/register" className={isActive("/register") ? "active-link" : ""}>
+                <Flex gap={2} background={bcb} px='5' py='2' borderRadius='7' id="pasek">
+                    <Link id="register" to="/register">
                         <Register />
                     </Link>
                     {isAuth === "false" ? (
-                        <Link to="/login" className={isActive("/login") ? "active-link" : ""}>
+                        <Link id="login" to="/login">
                             <Login theme={theme} />
                         </Link>
                     ) : (
-                        <Link to="/logout" className={isActive("/logout") ? "active-link" : ""}>
+                        <Link id="logout" to="/logout">
                             <Logout theme={theme} />
                         </Link>
                     )}
-                    <Add_CART />
+                    <div id="items">
+                        <Add_CART />
+                    </div>
                     <Center ml='2'>
-                        <Switch id='email-alerts' size='lg' onChange={handleColorModeToggle} sx={{ '.chakra-switch__track': { backgroundColor: swit }, '.chakra-switch__thumb': { backgroundColor: 'white' } }} />
+                        <Switch  id='email-alerts'  size='lg'  onChange={handleColorModeToggle}  sx={{ '.chakra-switch__track': { backgroundColor: swit }, '.chakra-switch__thumb': { backgroundColor: 'white' } }} />
                     </Center>
                 </Flex>
             </div>

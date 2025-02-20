@@ -16,7 +16,7 @@ const Register = () => {
     }
     const cardBgColor = useColorModeValue(theme.colors.reg.light, theme.colors.reg.dark);
     return (
-        <Button color='white' bg={'none'} _hover={{ bg: "gray.700" }} >
+        <Button color='white' bg={'none'} >
             <Link to="/register" >
                 Register
             </Link>
